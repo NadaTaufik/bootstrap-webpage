@@ -79,3 +79,39 @@ console.log(buatPerkenalan({
 }));
 
 console.log(formatKeahlian(["HTML", "CSS", "JavaScript"]));
+
+
+// D.5 — Display the learning goals dynamically
+
+const goalsTableBody = document.querySelector("#goals-table-body");
+
+const statusClasses = {
+    "In Progress": "text-bg-primary",
+    "Learning": "text-bg-warning",
+    "Continuing": "text-bg-info"
+};
+
+daftarKeahlian.forEach((keahlian) => {
+    const row = document.createElement("tr");
+
+    const skillCell = document.createElement("th");
+    skillCell.scope = "row";
+    skillCell.className = "ps-4 py-3";
+    skillCell.textContent = keahlian.nama;
+
+    const levelCell = document.createElement("td");
+    levelCell.textContent = keahlian.tingkat;
+
+    const targetCell = document.createElement("td");
+    targetCell.textContent = keahlian.target;
+
+    const statusCell = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className =
+        `badge ${statusClasses[keahlian.status] ?? "text-bg-secondary"}`;
+    badge.textContent = keahlian.status;
+    statusCell.appendChild(badge);
+
+    row.append(skillCell, levelCell, targetCell, statusCell);
+    goalsTableBody.appendChild(row);
+});
