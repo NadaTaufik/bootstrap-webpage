@@ -1,68 +1,51 @@
 
 // =============================================
-// PABW MEETING 8
-// JavaScript ES6+, Objects, Functions, Arrays
+// PABW Meeting 8
+// JavaScript ES6+, Functions, and Array Methods
 // My Informatics Learning Roadmap
 // =============================================
 
 
-// =============================================
 // SECTION B — PROFILE DATA
-// =============================================
 
-// B.1 — Object, const, and let
 const profil = {
     nama: "Nada Taufik Shahbal",
     peran: "Informatics Student",
     universitas: "Universitas Islam Indonesia",
+    nim: "25523266",
     keahlian: [
-        "HTML",
-        "CSS",
-        "Bootstrap",
-        "Java",
-        "Python",
-        "JavaScript"
+        "HTML", "CSS", "Bootstrap",
+        "Java", "Python", "JavaScript"
     ],
     sedangBelajar: "JavaScript"
 };
 
-// This variable can change when filtering data
 let pilihanAktif = "semua";
 
-// B.2 — Template literals
+const kota = profil.alamat?.kota ?? "Not provided";
+
 const kalimat = `My name is ${profil.nama}. I am an ${profil.peran} at ${profil.universitas}. I previously studied Java and Python, and I am currently learning ${profil.sedangBelajar}.`;
 
 console.log("=== SECTION B ===");
 console.log(kalimat);
-console.log("Skills:", profil.keahlian);
-console.log("Active selection:", pilihanAktif);
-
-// B.3 — Optional chaining and nullish coalescing
-const kota = profil.alamat?.kota ?? "Not provided";
-
 console.log("City:", kota);
 console.log("Name type:", typeof profil.nama);
+console.log("Active selection:", pilihanAktif);
 
 
-// =============================================
 // SECTION C — TWO PURE FUNCTIONS
-// =============================================
 
-// C.1 — Introduction function
 function buatPerkenalan({ nama, peran }) {
     return `${nama} — ${peran}`;
 }
 
-// C.2 — Skill formatting function
 const formatKeahlian = (daftar) => daftar.join(" · ");
 
-// C.3 — Test the functions
 console.log("=== SECTION C ===");
-
 console.log(buatPerkenalan(profil));
 console.log(formatKeahlian(profil.keahlian));
 
-// Different arguments
+// Test different arguments
 console.log(
     buatPerkenalan({
         nama: "Test Student",
@@ -75,13 +58,10 @@ console.log(
 );
 
 
-// =============================================
-// SECTION D — DATA STRUCTURES
-// =============================================
+// SECTION D — ARRAYS AND OBJECTS
 
-// D.1 — Array of objects: technical skills
-// Progress values are personal estimates.
-// null means no percentage has been assessed.
+// Progress percentages are self-estimates.
+// null means no percentage has been assigned.
 const daftarKeahlian = [
     {
         nama: "HTML",
@@ -101,7 +81,7 @@ const daftarKeahlian = [
         progress: null,
         icon: "bi-palette",
         warna: "info",
-        deskripsi: "Practising layouts, responsive design, and styling."
+        deskripsi: "Practising layouts and responsive styling."
     },
     {
         nama: "Bootstrap",
@@ -111,7 +91,7 @@ const daftarKeahlian = [
         progress: 45,
         icon: "bi-bootstrap",
         warna: "warning",
-        deskripsi: "Learning responsive grids and reusable components."
+        deskripsi: "Learning responsive grids and components."
     },
     {
         nama: "Java",
@@ -121,7 +101,7 @@ const daftarKeahlian = [
         progress: 70,
         icon: "bi-cup-hot",
         warna: "success",
-        deskripsi: "Previously studied OOP, algorithms, and application development."
+        deskripsi: "Previously studied OOP and algorithms."
     },
     {
         nama: "Python",
@@ -131,7 +111,7 @@ const daftarKeahlian = [
         progress: null,
         icon: "bi-code-square",
         warna: "secondary",
-        deskripsi: "Previously studied Python programming fundamentals."
+        deskripsi: "Previously studied Python fundamentals."
     },
     {
         nama: "JavaScript",
@@ -141,12 +121,11 @@ const daftarKeahlian = [
         progress: null,
         icon: "bi-filetype-js",
         warna: "warning",
-        deskripsi: "Currently learning ES6+, functions, objects, and arrays."
+        deskripsi: "Currently learning ES6+, functions, and arrays."
     }
 ];
 
-// D.2 — Array of objects: actual coursework projects
-// Check and update completion statuses if needed.
+// Update the completion status if necessary.
 const daftarProyek = [
     {
         judul: "My Informatics Learning Roadmap",
@@ -162,30 +141,28 @@ const daftarProyek = [
 
 const jumlahProyek = daftarProyek.length;
 
+console.log("=== SECTION D ===");
 console.log("Number of projects:", jumlahProyek);
 
-// D.3 — Display data as tables
-console.log("=== SECTION D ===");
-
+console.table(profil.keahlian);
 console.table(daftarKeahlian);
 console.table(daftarProyek);
 
-// MAP — Create an array of project titles
+// MAP — Transform all projects into titles
 const judulProyek = daftarProyek.map(
     (proyek) => proyek.judul
 );
 
 console.log("Project titles:", judulProyek);
 
-// FILTER — Get completed projects
+// FILTER — Select completed projects
 const proyekSelesai = daftarProyek.filter(
     (proyek) => proyek.selesai === true
 );
 
-console.log("Completed projects:");
 console.table(proyekSelesai);
 
-// FIND — Get a specific project
+// FIND — Find one project
 const proyekRoadmap = daftarProyek.find(
     (proyek) =>
         proyek.judul === "My Informatics Learning Roadmap"
@@ -193,22 +170,21 @@ const proyekRoadmap = daftarProyek.find(
 
 console.log("Found project:", proyekRoadmap);
 
-// FILTER — Find skills currently being learned
+// FILTER — Skills being learned
 const keahlianLearning = daftarKeahlian.filter(
     (keahlian) => keahlian.status === "Learning"
 );
 
-console.log("Currently learning:");
 console.table(keahlianLearning);
 
-// MAP — Get skill names
+// MAP — All skill names
 const namaKeahlian = daftarKeahlian.map(
     (keahlian) => keahlian.nama
 );
 
 console.log("Skill names:", namaKeahlian);
 
-// D.4 — Sort a copy, preserving the original array
+// COPY + SORT — Do not mutate original
 const proyekUrut = [...daftarProyek].sort(
     (a, b) => a.judul.localeCompare(b.judul)
 );
@@ -216,36 +192,37 @@ const proyekUrut = [...daftarProyek].sort(
 console.log("Sorted project copy:");
 console.table(proyekUrut);
 
-console.log("Original projects:");
+console.log("Original project list:");
 console.table(daftarProyek);
 
+// Object copy demonstration
+const salinanProfil = { ...profil };
 
-// =============================================
-// DISPLAY PROFILE DATA IN HTML
-// =============================================
+salinanProfil.nama = "Example Student";
 
-const navbarName = document.querySelector("#navbar-name");
-const heroRole = document.querySelector("#hero-role");
-const aboutDescription = document.querySelector("#about-description");
-const aboutRole = document.querySelector("#about-role");
-const footerName = document.querySelector("#footer-name");
+console.log("Original name:", profil.nama);
+console.log("Copied name:", salinanProfil.nama);
 
-navbarName.textContent =
+
+// DISPLAY PROFILE INFORMATION
+
+document.querySelector("#navbar-name").textContent =
     `${profil.nama.split(" ")[0]}'s Roadmap`;
 
-heroRole.textContent = profil.peran;
+document.querySelector("#hero-role").textContent =
+    profil.peran;
 
-aboutDescription.textContent =
-    `My name is ${profil.nama}. I study Informatics at ${profil.universitas}. I previously studied Java and Python, and I am currently learning ${profil.sedangBelajar} while developing my web development skills.`;
+document.querySelector("#about-description").textContent =
+    `My name is ${profil.nama}. I study Informatics at ${profil.universitas}. I previously studied Java and Python, and I am currently learning ${profil.sedangBelajar} while improving my web development skills.`;
 
-aboutRole.textContent = profil.peran;
+document.querySelector("#about-role").textContent =
+    profil.peran;
 
-footerName.textContent = `© 2026 ${profil.nama}`;
+document.querySelector("#footer-name").textContent =
+    `© 2026 ${profil.nama}`;
 
 
-// =============================================
-// D.5 — GENERATE SKILL CARDS
-// =============================================
+// D.5 — GENERATE TECHNICAL SKILL CARDS
 
 const skillsContainer =
     document.querySelector("#skills-container");
@@ -256,7 +233,6 @@ const badgeClasses = {
     "Previously Studied": "text-bg-secondary"
 };
 
-// Build cards using DOM methods
 function buatKartuKeahlian(keahlian) {
     const column = document.createElement("div");
     column.className = "col-md-4";
@@ -275,9 +251,10 @@ function buatKartuKeahlian(keahlian) {
 
     const icon = document.createElement("i");
     icon.className = `bi ${keahlian.icon}`;
+
     iconBox.appendChild(icon);
 
-    // Skill name
+    // Title
     const title = document.createElement("h3");
     title.className = "h4 fw-bold";
     title.textContent = keahlian.nama;
@@ -289,21 +266,21 @@ function buatKartuKeahlian(keahlian) {
 
     body.append(iconBox, title, description);
 
-    // Progress, when a percentage is available
+    // Progress
     if (keahlian.progress !== null) {
         const progressInfo = document.createElement("div");
         progressInfo.className =
             "d-flex justify-content-between mb-2";
 
-        const progressLabel = document.createElement("span");
-        progressLabel.className = "small fw-semibold";
-        progressLabel.textContent = "Progress";
+        const label = document.createElement("span");
+        label.className = "small fw-semibold";
+        label.textContent = "Progress";
 
-        const progressValue = document.createElement("span");
-        progressValue.className = "small";
-        progressValue.textContent = `${keahlian.progress}%`;
+        const value = document.createElement("span");
+        value.className = "small";
+        value.textContent = `${keahlian.progress}%`;
 
-        progressInfo.append(progressLabel, progressValue);
+        progressInfo.append(label, value);
 
         const progress = document.createElement("div");
         progress.className = "progress mb-3";
@@ -325,34 +302,29 @@ function buatKartuKeahlian(keahlian) {
         body.append(progressInfo, progress);
     }
 
-    // Status badge
+    // Status
     const badge = document.createElement("span");
     badge.className =
         `badge ${badgeClasses[keahlian.status] ?? "text-bg-secondary"}`;
 
     badge.textContent = keahlian.status;
-    body.appendChild(badge);
 
+    body.appendChild(badge);
     card.appendChild(body);
     column.appendChild(card);
 
     return column;
 }
 
-// MAP creates the six card elements
 const kartuKeahlian = daftarKeahlian.map(buatKartuKeahlian);
 
 skillsContainer.replaceChildren(...kartuKeahlian);
 
 
-// =============================================
 // D.6 — GENERATE LEARNING GOALS TABLE
-// =============================================
 
 const goalsTableBody =
     document.querySelector("#goals-table-body");
-
-console.log("Goals table found:", goalsTableBody);
 
 function buatBarisTujuan(keahlian) {
     const row = document.createElement("tr");
@@ -375,7 +347,6 @@ function buatBarisTujuan(keahlian) {
         `badge ${badgeClasses[keahlian.status] ?? "text-bg-secondary"}`;
 
     badge.textContent = keahlian.status;
-
     statusCell.appendChild(badge);
 
     row.append(
@@ -388,12 +359,15 @@ function buatBarisTujuan(keahlian) {
     return row;
 }
 
-// Generate table rows from the same array
 const barisTujuan = daftarKeahlian.map(buatBarisTujuan);
 
 goalsTableBody.replaceChildren(...barisTujuan);
 
-// Final verification
+
+// FINAL VERIFICATION
+
+console.log("=== FINAL VERIFICATION ===");
 console.log("Skills rendered:", kartuKeahlian.length);
 console.log("Goals rendered:", barisTujuan.length);
-console.log("=== SECTION D COMPLETE ===");
+console.log("Original profile name:", profil.nama);
+console.log("=== SECTIONS B–D COMPLETE ===");
