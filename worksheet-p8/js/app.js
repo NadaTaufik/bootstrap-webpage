@@ -1,1 +1,56 @@
-console.log("Meeting 8 JavaScript connected successfully!");
+
+// SECTION B — Profile Data
+
+// B.1 — Variables and objects
+const profil = {
+    nama: "Nada Taufik Shahbal",
+    peran: "Informatics Student",
+    universitas: "Universitas Islam Indonesia",
+    keahlian: [
+        "Java",
+        "Python",
+        "HTML",
+        "CSS",
+        "Bootstrap",
+        "JavaScript"
+    ],
+    sedangBelajar: "JavaScript"
+};
+
+// A value that can change
+let pilihanAktif = "semua";
+
+// Update this when your project list is confirmed
+const jumlahProyek = 2;
+
+// B.2 — Template literals
+const kalimat = `My name is ${profil.nama}. I am an ${profil.peran} at ${profil.universitas}. I have studied Java and Python, and I am currently learning ${profil.sedangBelajar}.`;
+
+// Display results in the Console
+console.log("=== SECTION B ===");
+console.log(kalimat);
+console.log("Skills:", profil.keahlian);
+console.log("Number of projects:", jumlahProyek);
+console.log("Active selection:", pilihanAktif);
+
+// B.3 — Optional chaining and nullish coalescing
+const kota = profil.alamat?.kota ?? "Not provided";
+
+console.log("City:", kota);
+console.log("Name type:", typeof profil.nama);
+console.log("Project count type:", typeof jumlahProyek);
+
+// B.4 — Display profile data in HTML
+const navbarName = document.querySelector("#navbar-name");
+const heroRole = document.querySelector("#hero-role");
+const aboutDescription = document.querySelector("#about-description");
+const footerName = document.querySelector("#footer-name");
+
+navbarName.textContent = `${profil.nama.split(" ")[0]}'s Roadmap`;
+
+heroRole.textContent = profil.peran;
+
+aboutDescription.textContent =
+    `My name is ${profil.nama}. I study Informatics at ${profil.universitas}. I previously studied Java and Python, and I am currently learning ${profil.sedangBelajar} while developing my web development skills.`;
+
+footerName.textContent = `© 2026 ${profil.nama}`;
