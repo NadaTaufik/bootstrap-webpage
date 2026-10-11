@@ -54,3 +54,28 @@ aboutDescription.textContent =
     `My name is ${profil.nama}. I study Informatics at ${profil.universitas}. I previously studied Java and Python, and I am currently learning ${profil.sedangBelajar} while developing my web development skills.`;
 
 footerName.textContent = `© 2026 ${profil.nama}`;
+
+
+// SECTION C — Two Pure Functions
+
+// C.1 — Create an introduction using profile data
+function buatPerkenalan({ nama, peran }) {
+    return `${nama} — ${peran}`;
+}
+
+// C.2 — Format a list of skills into one line
+const formatKeahlian = (daftar) => daftar.join(" · ");
+
+// C.3 — Test both functions
+console.log("=== SECTION C ===");
+
+console.log(buatPerkenalan(profil));
+console.log(formatKeahlian(profil.keahlian));
+
+// C.4 — Test with different arguments
+console.log(buatPerkenalan({
+    nama: "Test Student",
+    peran: "Web Developer"
+}));
+
+console.log(formatKeahlian(["HTML", "CSS", "JavaScript"]));
