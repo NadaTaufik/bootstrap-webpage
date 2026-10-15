@@ -191,3 +191,189 @@ markActiveButton(allButton);
 console.log("=== MEETING 9 VERIFICATION ===");
 console.log("Projects rendered:", daftarProyek.length);
 console.log("Event delegation initialized successfully.");
+
+
+/*
+ * =====================================================
+ * SHEET D — FORM VALIDATION
+ * =====================================================
+ */
+
+// Select the form and its fields
+const goalForm = document.querySelector("#goal-form");
+
+const skillName = document.querySelector("#skill-name");
+const targetLevel = document.querySelector("#target-level");
+const targetDate = document.querySelector("#target-date");
+
+const submitButton = document.querySelector("#submit-goal");
+const successMessage = document.querySelector("#form-success");
+
+// Select the error-message elements
+const skillNameError =
+    document.querySelector("#skill-name-error");
+
+const targetLevelError =
+    document.querySelector("#target-level-error");
+
+const targetDateError =
+    document.querySelector("#target-date-error");
+
+
+// -----------------------------------------------------
+// Display or remove an error for one field
+// -----------------------------------------------------
+
+function setFieldError(field, errorElement, message) {
+    errorElement.textContent = message;
+
+    const invalid = message !== "";
+
+    field.setAttribute("aria-invalid", String(invalid));
+
+    field.classList.toggle("is-invalid", invalid);
+    field.classList.toggle("is-valid", !invalid);
+}
+
+
+// -----------------------------------------------------
+// Validate all three fields
+// -----------------------------------------------------
+
+function validateForm() {
+    const name = skillName.value.trim();
+    const level = targetLevel.value.trim();
+    const date = targetDate.value.trim();
+
+    let valid = true;
+
+    // Validate skill name
+    if (name === "") {
+        setFieldError(
+            skillName,
+            skillNameError,
+            "Please enter a skill name."
+        );
+        valid = false;
+    } else {
+        setFieldError(skillName, skillNameError, "");
+    }
+
+    // Validate target level
+    if (level === "") {
+        setFieldError(
+            targetLevel,
+            targetLevelError,
+            "Please select a target level."
+        );
+        valid = false;
+    } else {
+        setFieldError(targetLevel, targetLevelError, "");
+    }
+
+    // Validate target date
+    if (date === "") {
+        setFieldError(
+            targetDate,
+            targetDateError,
+            "Please choose a target date."
+        );
+        valid = false;
+    } else if (!targetDate.validity.valid) {
+        setFieldError(
+            targetDate,
+            targetDateError,
+            "Please enter a valid target date."
+        );
+        valid = false;
+    } else {
+        setFieldError(targetDate, targetDateError, "");
+    }
+
+    // Enable submission only when all fields are valid
+    submitButton.disabled = !valid;
+
+    return valid;
+}
+
+
+// -----------------------------------------------------
+// Validate while the user interacts
+// -----------------------------------------------------
+
+skillName.addEventListener("input", () => {
+    successMessage.hidden = true;
+    validateForm();
+});
+
+targetLevel.addEventListener("change", () => {
+    successMessage.hidden = true;
+    validateForm();
+});
+
+targetDate.addEventListener("input", () => {
+    successMessage.hidden = true;
+    validateForm();
+});
+
+targetDate.addEventListener("change", () => {
+    successMessage.hidden = true;
+    validateForm();
+});
+
+
+// -----------------------------------------------------
+// Handle form submission without reloading
+// -----------------------------------------------------
+
+goalForm.addEventListener("submit", (event) => {
+    // Stop the browser from reloading the page
+    event.preventDefault();
+
+    // Check every field before accepting submission
+    if (!validateForm()) {
+        const firstInvalid =
+            goalForm.querySelector('[aria-invalid="true"]');
+
+        if (firstInvalid) {
+            firstInvalid.focus();
+        }
+
+        return;
+    }
+
+    // Read the validated values
+    const newGoal = {
+        skill: skillName.value.trim(),
+        target: targetLevel.value,
+        date: targetDate.value
+    };
+
+    console.log("New learning goal submitted:", newGoal);
+
+    // Show confirmation
+    successMessage.textContent =
+        `Learning goal "${newGoal.skill}" submitted successfully.`;
+
+    successMessage.hidden = false;
+
+    // Clear form after successful submission
+    goalForm.reset();
+
+    // Return to the initial disabled state
+    submitButton.disabled = true;
+
+    [skillName, targetLevel, targetDate].forEach((field) => {
+        field.classList.remove("is-valid", "is-invalid");
+        field.removeAttribute("aria-invalid");
+    });
+});
+
+
+// -----------------------------------------------------
+// Initial validation
+// -----------------------------------------------------
+
+validateForm();
+
+console.log("Sheet D: Form validation initialized.");
