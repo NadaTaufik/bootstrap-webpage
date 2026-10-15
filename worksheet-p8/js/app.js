@@ -126,7 +126,7 @@ const daftarKeahlian = [
 ];
 
 // Update the completion status if necessary.
-const daftarProyek = [
+export const daftarProyek = [
     {
         judul: "My Informatics Learning Roadmap",
         tahun: 2026,

@@ -1,12 +1,18 @@
 
-// =============================================
-// PABW Meeting 8
-// JavaScript ES6+, Functions, and Array Methods
-// My Informatics Learning Roadmap
-// =============================================
+/*
+ * =====================================================
+ * PABW MEETING 8 & 9
+ * My Informatics Learning Roadmap
+ * JavaScript ES6+, Functions, Arrays, and Data
+ * =====================================================
+ *
+ * app.js: Profile data and existing functionality
+ * dom.js: Meeting 9 DOM rendering and event handling
+ */
 
-
+// =====================================================
 // SECTION B — PROFILE DATA
+// =====================================================
 
 const profil = {
     nama: "Nada Taufik Shahbal",
@@ -14,8 +20,12 @@ const profil = {
     universitas: "Universitas Islam Indonesia",
     nim: "25523266",
     keahlian: [
-        "HTML", "CSS", "Bootstrap",
-        "Java", "Python", "JavaScript"
+        "HTML",
+        "CSS",
+        "Bootstrap",
+        "Java",
+        "Python",
+        "JavaScript"
     ],
     sedangBelajar: "JavaScript"
 };
@@ -33,7 +43,9 @@ console.log("Name type:", typeof profil.nama);
 console.log("Active selection:", pilihanAktif);
 
 
+// =====================================================
 // SECTION C — TWO PURE FUNCTIONS
+// =====================================================
 
 function buatPerkenalan({ nama, peran }) {
     return `${nama} — ${peran}`;
@@ -58,10 +70,13 @@ console.log(
 );
 
 
+// =====================================================
 // SECTION D — ARRAYS AND OBJECTS
+// =====================================================
 
 // Progress percentages are self-estimates.
 // null means no percentage has been assigned.
+
 const daftarKeahlian = [
     {
         nama: "HTML",
@@ -125,8 +140,15 @@ const daftarKeahlian = [
     }
 ];
 
-// Update the completion status if necessary.
-const daftarProyek = [
+
+// =====================================================
+// PROJECT DATA — EXPORTED FOR MEETING 9
+// =====================================================
+
+// This array is imported by dom.js.
+// Preserve the original project information.
+
+export const daftarProyek = [
     {
         judul: "My Informatics Learning Roadmap",
         tahun: 2026,
@@ -143,17 +165,22 @@ const jumlahProyek = daftarProyek.length;
 
 console.log("=== SECTION D ===");
 console.log("Number of projects:", jumlahProyek);
-
 console.table(profil.keahlian);
 console.table(daftarKeahlian);
 console.table(daftarProyek);
 
-// MAP — Transform all projects into titles
+
+// =====================================================
+// ARRAY METHODS — MAP, FILTER, FIND, SORT
+// =====================================================
+
+// MAP — Transform projects into titles
 const judulProyek = daftarProyek.map(
     (proyek) => proyek.judul
 );
 
 console.log("Project titles:", judulProyek);
+
 
 // FILTER — Select completed projects
 const proyekSelesai = daftarProyek.filter(
@@ -161,6 +188,7 @@ const proyekSelesai = daftarProyek.filter(
 );
 
 console.table(proyekSelesai);
+
 
 // FIND — Find one project
 const proyekRoadmap = daftarProyek.find(
@@ -170,12 +198,14 @@ const proyekRoadmap = daftarProyek.find(
 
 console.log("Found project:", proyekRoadmap);
 
-// FILTER — Skills being learned
+
+// FILTER — Skills currently being learned
 const keahlianLearning = daftarKeahlian.filter(
     (keahlian) => keahlian.status === "Learning"
 );
 
 console.table(keahlianLearning);
+
 
 // MAP — All skill names
 const namaKeahlian = daftarKeahlian.map(
@@ -184,7 +214,8 @@ const namaKeahlian = daftarKeahlian.map(
 
 console.log("Skill names:", namaKeahlian);
 
-// COPY + SORT — Do not mutate original
+
+// COPY + SORT — Do not mutate the original array
 const proyekUrut = [...daftarProyek].sort(
     (a, b) => a.judul.localeCompare(b.judul)
 );
@@ -195,6 +226,7 @@ console.table(proyekUrut);
 console.log("Original project list:");
 console.table(daftarProyek);
 
+
 // Object copy demonstration
 const salinanProfil = { ...profil };
 
@@ -204,7 +236,9 @@ console.log("Original name:", profil.nama);
 console.log("Copied name:", salinanProfil.nama);
 
 
+// =====================================================
 // DISPLAY PROFILE INFORMATION
+// =====================================================
 
 document.querySelector("#navbar-name").textContent =
     `${profil.nama.split(" ")[0]}'s Roadmap`;
@@ -222,7 +256,9 @@ document.querySelector("#footer-name").textContent =
     `© 2026 ${profil.nama}`;
 
 
+// =====================================================
 // D.5 — GENERATE TECHNICAL SKILL CARDS
+// =====================================================
 
 const skillsContainer =
     document.querySelector("#skills-container");
@@ -290,6 +326,7 @@ function buatKartuKeahlian(keahlian) {
             `progress-bar bg-${keahlian.warna}`;
 
         progressBar.style.width = `${keahlian.progress}%`;
+
         progressBar.setAttribute("role", "progressbar");
         progressBar.setAttribute(
             "aria-valuenow",
@@ -302,8 +339,9 @@ function buatKartuKeahlian(keahlian) {
         body.append(progressInfo, progress);
     }
 
-    // Status
+    // Status badge
     const badge = document.createElement("span");
+
     badge.className =
         `badge ${badgeClasses[keahlian.status] ?? "text-bg-secondary"}`;
 
@@ -316,12 +354,15 @@ function buatKartuKeahlian(keahlian) {
     return column;
 }
 
+// Render skill cards
 const kartuKeahlian = daftarKeahlian.map(buatKartuKeahlian);
 
 skillsContainer.replaceChildren(...kartuKeahlian);
 
 
+// =====================================================
 // D.6 — GENERATE LEARNING GOALS TABLE
+// =====================================================
 
 const goalsTableBody =
     document.querySelector("#goals-table-body");
@@ -329,24 +370,30 @@ const goalsTableBody =
 function buatBarisTujuan(keahlian) {
     const row = document.createElement("tr");
 
+    // Skill name
     const skillCell = document.createElement("th");
     skillCell.className = "ps-4 py-3";
     skillCell.scope = "row";
     skillCell.textContent = keahlian.nama;
 
+    // Current level
     const levelCell = document.createElement("td");
     levelCell.textContent = keahlian.tingkat;
 
+    // Target level
     const targetCell = document.createElement("td");
     targetCell.textContent = keahlian.target;
 
+    // Status
     const statusCell = document.createElement("td");
 
     const badge = document.createElement("span");
+
     badge.className =
         `badge ${badgeClasses[keahlian.status] ?? "text-bg-secondary"}`;
 
     badge.textContent = keahlian.status;
+
     statusCell.appendChild(badge);
 
     row.append(
@@ -359,12 +406,15 @@ function buatBarisTujuan(keahlian) {
     return row;
 }
 
+// Render learning goals table
 const barisTujuan = daftarKeahlian.map(buatBarisTujuan);
 
 goalsTableBody.replaceChildren(...barisTujuan);
 
 
+// =====================================================
 // FINAL VERIFICATION
+// =====================================================
 
 console.log("=== FINAL VERIFICATION ===");
 console.log("Skills rendered:", kartuKeahlian.length);
