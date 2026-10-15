@@ -3,12 +3,13 @@
  * =====================================================
  * PABW MEETING 8 & 9
  * My Informatics Learning Roadmap
- * JavaScript ES6+, Functions, Arrays, and Data
- * =====================================================
+ * JavaScript ES6+, Functions, and Array Methods
  *
- * app.js: Profile data and existing functionality
- * dom.js: Meeting 9 DOM rendering and event handling
+ * app.js — Data and existing Meeting 8 functionality
+ * dom.js — Meeting 9 rendering, events, and interaction
+ * =====================================================
  */
+
 
 // =====================================================
 // SECTION B — PROFILE DATA
@@ -142,22 +143,24 @@ const daftarKeahlian = [
 
 
 // =====================================================
-// PROJECT DATA — EXPORTED FOR MEETING 9
+// MEETING 9 — PROJECT DATA
 // =====================================================
 
-// This array is imported by dom.js.
-// Preserve the original project information.
+// Export the array so dom.js can import it.
+// The category property is used by the filter buttons.
 
 export const daftarProyek = [
     {
         judul: "My Informatics Learning Roadmap",
         tahun: 2026,
-        selesai: true
+        selesai: true,
+        category: "Web"
     },
     {
         judul: "JamuSync",
         tahun: 2026,
-        selesai: false
+        selesai: false,
+        category: "Java"
     }
 ];
 
