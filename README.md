@@ -131,3 +131,71 @@ the final GitHub submission.
 Nada Taufik Shahbal  
 Informatics International Program  
 Universitas Islam Indonesia
+
+## Meeting 9 — DOM, Events, and Interactivity
+
+### Overview
+
+This meeting extends my Informatics Learning Roadmap from Meeting 8 by adding dynamic project rendering, category filtering, and interactive form validation using JavaScript.
+
+### Features Implemented
+
+**1. DOM Selection**
+- Selected HTML elements using `querySelector()` and `querySelectorAll()`.
+- Verified selectors in Firefox DevTools to avoid null errors.
+
+**2. Dynamic Project Rendering**
+- Generated project cards directly from the `daftarProyek` array.
+- Used `createElement()`, `textContent`, and `append()`.
+- Cleared the container before rendering to prevent duplicated cards.
+- Displayed an empty-state message when no projects matched a filter.
+
+**3. Event Delegation**
+- Attached one click listener to the parent filter container.
+- Used `event.target.closest("button")` and `dataset.category`.
+- Implemented category filtering for All, Web, Java, and Python.
+- Highlighted the active filter button.
+
+**4. Form Validation**
+- Prevented page reload using `event.preventDefault()`.
+- Validated Skill Name, Target Level, and Target Date.
+- Displayed individual error messages for invalid fields.
+- Used `trim()` to reject whitespace-only input.
+- Updated `aria-invalid` for accessibility.
+- Disabled submission until all fields were valid.
+- Displayed a success message after valid submission.
+
+### Project Structure
+
+- `profile.html` — Page structure and Bootstrap styling.
+- `js/app.js` — Profile, skills, projects, and existing data functions.
+- `js/dom.js` — DOM rendering, filters, event handling, and form validation.
+- `screenshots/` — Testing and debugging evidence.
+
+### Testing
+
+The page was tested using Firefox DevTools and a local development server.
+
+Verified results:
+- 12 DOM selectors found their elements.
+- 2 project cards rendered from the project array.
+- 6 technical skill cards rendered.
+- 6 learning goals displayed.
+- One event listener handled all category filters.
+- The Python filter returned zero projects.
+- Repeated filter clicks did not duplicate cards.
+- A valid learning goal was submitted without reloading the page.
+
+### AI Assistance Disclosure
+
+I used ChatGPT to help understand the worksheet instructions, plan the implementation, draft and refine JavaScript and HTML code, troubleshoot the module export error, and review the written explanations and README.
+
+I worked with the code in VS Code, ran and tested the webpage in Firefox, inspected DOM elements and event listeners using DevTools, verified the results, and managed the GitHub repository.
+
+The webpage is based on my Informatics learning roadmap and existing Meeting 8 coursework. I reviewed the implementation and testing results as part of completing this assignment.
+
+### Learning Reflection
+
+This meeting helped me understand how JavaScript connects data to the webpage through the DOM. I learned why event delegation is useful, why containers must be cleared before re-rendering, and how validation improves form interaction.
+
+I also learned to inspect Console errors, test selectors, and verify behavior before making unnecessary changes.
